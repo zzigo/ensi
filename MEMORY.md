@@ -22,3 +22,6 @@ Finished transport synchronization by typing SyncService messages and applying r
 
 #<26-04-24> vps deployment complete
 Deployed ENSi standalone to `/opt/ensi` on the VPS. Built the Vite client, started the Bun/Elysia backend with PM2 on port 3100, configured Caddy to serve `ensi.zztt.org` from `client/dist`, and proxied `/api/*` plus `/ws` to the backend.
+
+#<26-04-24> score library migrated
+Copied the original score library from `25-zztt/zzttp/public/inc/appscores` into `server/public/inc/appscores`. Updated the scores API to recursively list nested `.txt` scores with encoded IDs and path-safe reads/writes, and adjusted client fetch/save calls for nested score paths.

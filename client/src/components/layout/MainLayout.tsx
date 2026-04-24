@@ -140,7 +140,7 @@ export const MainLayout: React.FC = () => {
         if (Array.isArray(scores)) {
           setLibrary(scores);
           if (scores.length > 0) {
-            const first = await fetch(`/api/scores/${scores[0].id}`);
+            const first = await fetch(`/api/scores/${encodeURIComponent(scores[0].id)}`);
             const data = await first.json();
             if (data.text) {
               updatePanelText('score-ed', data.text);

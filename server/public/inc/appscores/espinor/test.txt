@@ -1,0 +1,65 @@
+name this is name
+clicklang en
+vin 0
+ain 0.5
+aout 0.7
+reb 0.6
+title1 8 800 HELLO ENSI 
+vplay 1 0  #MHCBCBM <mix hue contrast brightness saturation blur mask>
+vplay 2 0 
+vplay 3 0 
+vplay 4 0 0 1 1 1 1 0 2
+t 70
+pickup 4
+
+
+1 b title1 5 1000 primer compás
+: subt 2000 la realidad eterna y cósmica
+: mark A init
+1
+1
+1 subt 2000 or other wise
+
+1 b title1 3 1000 compas dos
+1
+1
+1
+rep 4 3
+
+# 3/4 
+1 b title1 3 1000 tercer compás
+: vin 0.5 5000
+: t 80
+1
+1
+
+
+# 4/4
+1 b title1 5 1000 cuarto compás t 130
+: mark B tridon
+: t 130
+1 vin 1 0
+1 vin 0 0
+1 vin 1 0
+1 vin 0 0
+1 vin 1 0
+
+1 b title1 5 1000 compas 5
+: mark C cincon
+: t 45
+1
+
+1 b title1 5 1000 compas 6
+: mark D punchon
+: t 65
+1
+1
+0.5
+0.5
+0.5
+0.5
+2
+2 vin 0 2000
+1 stop
+
+

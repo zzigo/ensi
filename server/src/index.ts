@@ -2,11 +2,40 @@ import { Elysia, t } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { staticPlugin } from "@elysiajs/static";
 import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 
 // Configuration
-const SCORES_DIR = process.env.ENSI_SCORES_DIR || join(process.cwd(), "..", "scores");
-const PORT = process.env.PORT || 3000;
+const SCORES_DIR = resolve(process.env.ENSI_SCORES_DIR || resolve(process.cwd(), "public", "inc", "appscores"));
+const PORT = Number(process.env.PORT || 3000);
+
+const isInsideDirectory = (baseDir: string, targetPath: string) => {
+  const relativePath = relative(baseDir, targetPath);
+  return relativePath === "" || (!relativePath.startsWith("..") && !isAbsolute(relativePath));
+};
+
+const toScoreId = (filePath: string) => relative(SCORES_DIR, filePath).split(sep).join("/");
+
+const getScorePath = (id: string) => {
+  const decodedId = decodeURIComponent(id);
+  const targetPath = resolve(SCORES_DIR, decodedId);
+
+  if (!decodedId.endsWith(".txt") || !isInsideDirectory(SCORES_DIR, targetPath)) {
+    throw new Error("Invalid score path");
+  }
+
+  return targetPath;
+};
+
+const listScoreFiles = async (dir: string): Promise<string[]> => {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(entries.map(async (entry) => {
+    const entryPath = resolve(dir, entry.name);
+    if (entry.isDirectory()) return listScoreFiles(entryPath);
+    return entry.isFile() && entry.name.endsWith(".txt") ? [entryPath] : [];
+  }));
+
+  return files.flat();
+};
 
 // Ensure scores directory exists
 try {
@@ -19,7 +48,7 @@ const app = new Elysia()
   .use(cors())
   .use(staticPlugin({
     prefix: '/public',
-    assets: join(process.cwd(), "public")
+    assets: resolve(process.cwd(), "public")
   }))
   
   // Health check
@@ -31,15 +60,18 @@ const app = new Elysia()
       // List all scores
       .get("/", async () => {
         try {
-          const files = await readdir(SCORES_DIR);
+          const files = await listScoreFiles(SCORES_DIR);
           const scores = files
-            .filter(f => f.endsWith(".txt"))
-            .map(f => ({
-              id: f.replace(".txt", ""),
-              fileName: f,
-              label: f.replace(".txt", ""),
-              url: `/api/scores/${f.replace(".txt", "")}`
-            }));
+            .map(filePath => {
+              const id = toScoreId(filePath);
+              const label = id.replace(/\.txt$/, "");
+              return {
+                id,
+                fileName: id.split("/").at(-1) || id,
+                label,
+                url: `/api/scores/${encodeURIComponent(id)}`
+              };
+            });
           return scores;
         } catch (error) {
           return { error: "Failed to list scores", details: String(error) };
@@ -49,7 +81,7 @@ const app = new Elysia()
       // Get specific score content
       .get("/:id", async ({ params: { id } }) => {
         try {
-          const content = await readFile(join(SCORES_DIR, `${id}.txt`), "utf8");
+          const content = await readFile(getScorePath(id), "utf8");
           return { id, text: content };
         } catch (error) {
           return { error: `Failed to read score ${id}`, details: String(error) };
@@ -60,7 +92,9 @@ const app = new Elysia()
       .post("/:id", async ({ params: { id }, body }) => {
         try {
           const { text } = body as { text: string };
-          await writeFile(join(SCORES_DIR, `${id}.txt`), text, "utf8");
+          const scorePath = getScorePath(id);
+          await mkdir(dirname(scorePath), { recursive: true });
+          await writeFile(scorePath, text, "utf8");
           return { success: true, id };
         } catch (error) {
           return { error: `Failed to save score ${id}`, details: String(error) };

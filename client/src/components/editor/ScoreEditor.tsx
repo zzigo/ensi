@@ -72,7 +72,7 @@ export const ScoreEditor: React.FC<ScoreEditorProps> = ({ panelId }) => {
     const meta = panels[panelId];
     if (!meta?.id) return;
     try {
-      await fetch(`/api/scores/${meta.id}`, {
+      await fetch(`/api/scores/${encodeURIComponent(meta.id)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })

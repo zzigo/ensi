@@ -1,0 +1,581 @@
+name espinor score v2 ENSI 4.5 251022
+
+
+t 116  # tempo
+
+
+# INIT AUDIO
+clicklang sp
+ain 0.5
+elec 0.6
+aout 0.7
+reb 0.5
+reb time 5000
+
+ #VIDEO CONFIG
+vin 0
+b1 0.5 0 100
+b2 0.5 0 100
+b3 0.5 100
+b4 0.5 100
+
+ title1  5 800 ZZTT | RCP
+ letra 25 800 ESPINOR
+
+ # future crops
+ # vin crop 0 0
+ # avplayer crop 1 0 0
+ # avplayer crop 2 0 0
+ # avplayer crop 3 0 0
+ # avscreen geometry 1 0 0 0.8 # dejamos franja para subs
+
+ clicktrack out 3 # setea la salida de audio del track
+ vin xflip 1
+# init subt yshift 3.3 # corremos el sub arriba
+audio-in 1
+
+
+# SCORE ESPINOR
+pickup 4
+# compas 1 
+1 b vin 1 4000
+: vrec 1 4 # rec b1 for 4 beats
+0.5
+0.5 vrec 2 2 # rec buffer 2 for 2 beats
+1 vplay 1 0 0.5 2000
+1
+
+# compas 2
+1 b vplay 1 0 1 4 # play b1 from 0 at 1 rate 4 beats
+1 vrec 2 4 # rec during 4 beats
+1
+1
+
+
+# compas 3 5/2
+2 b vplay 1 2000 -1 2000 
+2 vplay 2 1000 0.25 6000 
+2
+2
+2
+
+
+# compas 4
+2 b # C4
+1 vplay 1 3000 -1 1000 
+1
+2
+2
+2
+2/2
+3/4
+
+
+# compas 7
+1 b vplay 1 13000 -1 1500 
+1
+1
+1
+1 b vplay 1 14500 1 1000 
+1
+1
+1
+1 b vplay 1 500 0.5 3000 
+1
+1
+1
+: rep 12 3
+# compas 10
+1 b vplay 1 18500 1 6000 
+1
+2
+2
+2
+2
+2
+# ______________________
+t 60
+2/4 # c11
+: mark B
+1 b # c12
+1
+1 vplay 2 220500 0.25 3000 
+0 palabra random 31500 300 7000
+1
+1 b # c13
+1 vplay 1 30500 0.5 4000 
+1
+1
+rep 5 3
+5/4 # c14
+1 b # c15
+1 vplay 1 16000 1 1000 
+1
+1 vplay 1 16000 1 1000 
+1
+# c16
+1 b vplay 1 16000 1 1000 
+: mark C
+1
+1
+1 b vrec 0 60000 # c17
+1
+1
+3/4 # c18
+1 b vplay 1 16000 1 1000  # c19
+1
+1
+1
+1
+# c20
+1 b vplay 1 0 0.5 6000 
+1
+1
+# c21
+1 b
+1
+1
+1
+# c22
+1 b
+1
+1
+1
+# c23
+1 b vplay 1 22000 -1 8000  # c23
+1
+1
+1
+rep 1 7
+0.5 b vplay 2 22000 -0.25 10000 
+0 vplay 1 33000 0.7 2000 
+0.5 vplay 1 17000 -0.25 500 
+1 b # c25
+1 vplay 1 35000 -0.7 2000 
+1
+1 vplay 1 37000 0.7 2000 
+1
+# c26
+1 b vplay 1 38000 -0.7 2000 
+1 vplay 1 39000 -0.7 2000 
+1
+1 vplay 1 40000 0.7 2000 
+1
+# c27
+1 b vplay 1 42000 -0.7 2000 
+1
+1
+1
+1
+5/4
+# c29
+1 b vplay 1 53000 1 3000 
+1 vplay 1 56000 2 3000 
+1
+1
+1
+# c30
+1 b vplay 1 58000 1 3000 
+1
+1 vplay 1 58000 -1 3000 
+1
+1
+# c31
+1 b vplay 1 42000 -1 8000 
+1
+1
+1
+1
+5/4
+# c33
+1 b vrec 0 60000
+1
+1
+1
+1
+# c34
+1 b vplay 1 4000 1 2000 
+1
+1
+1
+1
+# c35
+1 b vplay 2 8000 0.25 8000 
+1
+1
+1
+1
+5/4
+# c37
+1 b palabra freeze 1 20000 1000 3000 1
+1
+1
+# c38
+1 b palabra random 20000 100 4000
+1
+1
+1
+# c39
+1 b vplay 1 14000 -1 4000 
+1
+1
+1
+# c40
+1 b vplay 1 27000 -1 4000 
+1
+1
+1
+# c41
+1 b palabra freeze 1 35000 1000 2000 1
+1
+1 palabra freeze 1 37000 100 6000 2
+# c42
+3/4
+# c43
+t 76
+rep 2 4
+1 b vplay 1 26000 1 2000 
+1
+# c44
+t 60
+1 b vplay 1 37000 0.25 4000 
+1
+1
+1
+3/4
+# c46
+1 b vplay 1 57000 -1 3000 
+1
+# c47
+1 b vplay 2 7000 0.25 2000 
+1
+1
+1 palabra freeze 1 6000 10 1000 3
+# c48
+1 b
+1
+1
+# c49
+1 b vrec 0 60000
+1
+1
+# aca falta completar y componer electronica hasta c69
+.5
+.5 vplay 2 3000 0.5 4000 
+3/4
+# c51
+1 b vplay 1 7000 -1 3000 
+1
+1
+# c52
+1 b vplay 1 10000 -1 3000 
+1
+1
+# c53
+1 b
+1
+1 vplay 1 13000 1 3000 
+1
+# c54
+.5 b vplay 1 16000 -1 500 
+.5 vplay 1 16000 1 500 
+.5 vplay 1 17000 -1 500 
+.5 vplay 1 17000 0.9 500 
+.5 vplay 1 18000 -0.9 500 
+.5 vplay 1 18000 0.8 500 
+.5 vplay 1 19000 -0.8 500 
+.5 vplay 1 19000 0.7 500 
+.5 vplay 1 20000 -0.7 500 
+.5 vplay 1 20000 0.6 500 
+.5 vplay 1 21000 -0.6 500 
+6/8
+# c56
+.5 b vplay 1 22000 0.8 3000 
+.5 vplay 2 22000 0.25 4000 
+.5
+.5
+.5
+.5
+
+# c57
+.5 b
+.5
+.5
+.5 vplay 1 22000 0.5 1000 
+.5
+.5
+.5
+.5
+.5 vplay 2 23000 -0.5 4000 
+2/4
+3/4  #  c59
+# c60
+1 b vplay 1 33000 -0.5 11000 
+1
+1
+5/4
+4/4    # c62
+# c63
+1 b vplay 1 48000 -1 6000 
+1
+1
+4/4
+# c65
+1 b
+1 vplay 1 54000 -0.1 10000 
+1
+1
+4/4
+3/4   # c67
+# c68
+1 b vplay 1 48000 -1 3000 
+1
+1
+# c69 HOJA  8 BOLAS
+1 b vrec 0 60000
+1
+1
+1
+# c70
+1 b vplay 1 4000 -1 4000 
+0 subt 1200 nosotros
+1
+1
+1
+# c71
+1 b vplay 1 8000 -1 4000 
+1
+1
+1
+# c72
+1 b vplay 1 12000 -1 4000 
+1
+1
+1
+# c73
+1 b vplay 1 16000 -1 4000 
+1
+1
+1
+# c74
+1 b vplay 1 20000 -1 4000 
+1
+1 vplay 2 24000 -0.25 4000 
+1
+# c75
+1 b
+1
+1
+1
+# c76
+0 vplay 1 28000 -1 4000 
+1
+1
+0 palabra random 4000 50 8000
+1
+1
+# c77
+1 b vplay 1 28000 -1 4000 
+1
+1
+1
+# 0 palabra freeze 1 28000 200 4000 1
+# c78
+1 b # palabra iterado 1
+1
+1 # palabra iterado 0
+1
+# c79
+1 b subt 2000 la realidad eterna y cósmica
+1
+1
+1
+0 vplay 1 40000 -1 4000 
+# c80
+1 b vplay 2 44000 -0.25 16000 
+1
+1
+1
+4/4 # c81 PETRI
+4/4
+4/4
+4/4
+# c85
+1 b vrec 0 6000
+1
+1
+1
+# c86
+1 b vplay 1 4000 -1 4000 
+1
+1
+1
+# c87 
+1 b 
+1
+1
+1
+# c88
+1 b
+1
+1
+1
+# c89
+1 b vplay 2 16000 1 8000 
+1
+1
+1
+# c90
+1 b
+1
+1
+1
+# c91
+1 b 
+1
+1
+1
+# c92 HOJA 9
+1 b palabra final 1
+0 vplay 2 12000 -0.25 8000 
+1
+1
+1
+# c93
+1 b
+1
+1
+1
+# c94
+1 b palabra final 0
+1
+1
+1
+# c95
+1 b
+1
+1
+1
+# c96
+1 b vplay 2 48000 -0.25 8000 
+1
+1
+1
+# c97
+1 b
+1
+1
+1
+# c98
+1 b
+1
+1
+1
+# c99
+1 b
+1
+1
+1
+# c100
+1 b palabra freeze 1 -1 10 4000 1
+1
+1
+1
+# c101
+1 b palabra iterado 1
+1
+1
+1
+# c102
+1 b
+1
+1
+1
+# c103 HOJA 10
+1 b
+1
+1
+1
+# c104
+1 b
+1
+1
+1
+# c105
+1 b
+1
+1
+1
+# c106
+1 b
+1
+1
+1
+# c107 3/4
+1 b  vplay 2 10000 -1 12000 
+1
+1
+# c108
+1 b
+1
+1
+1
+# c109
+1 b
+1
+1
+1
+# c110
+1 b
+1
+1   
+
+# c111
+1 b vplay 1 0 0
+.1 vin  0
+1
+1 vplay 
+.1 vin  0.5
+1
+# c112
+1 b 
+1
+1
+1
+# c113
+1 b
+1
+1
+1
+# c114
+1 b
+1
+1
+1
+ # c115
+1 b
+1
+1
+1
+ # c116
+ 1 b
+1
+1
+1
+# c117
+1 b
+1
+1
+1
+# c118
+1 b # palabra iterado 0
+1 vin 0 8000
+.1 vplay 1 0 8000
+.1 vplay 2 0 0
+1
+1
+# c119
+1 b 
+1 
+1 
+1 stop

@@ -1,0 +1,236 @@
+iname ENSI list of score commandslk
+
+# ------------------------------------------------------------
+# 1) COMMENTS
+# ------------------------------------------------------------
+# Full-line comment:
+# this line is ignored
+#
+# Inline comment:
+# 1 b title1 5 800 TEXT # everything after # is ignored
+
+# ------------------------------------------------------------
+# 2) SCORE METADATA / LOAD-TIME
+# ------------------------------------------------------------
+# name <display label>
+#
+# Optional legacy wrapper:
+# init <command...>
+#
+# pickup <beats>
+# Sets score count-in beats.
+#
+# Any command line WITHOUT a time token is immediate.
+# Immediate commands run when score is loaded/reloaded and in start-state sync.
+# Example:
+# t 70
+# clicklang sp
+# ain 0.5
+
+# ------------------------------------------------------------
+# 3) TIME TOKENS (PER-BEAT MODE)
+# ------------------------------------------------------------
+# Numeric beat line:
+# <beatLen> [b] [s] [f] [command...]
+#
+# Examples:
+# 1 b title1 5 800 START
+# 0.5
+# 2
+# 1. subt 1200 dotted
+#
+# Flags:
+# b = strong beat / downbeat accent
+# s = subdivision accent
+# f = fermata marker (adds randomized extra pause ~0.7..1.5 beats, not added to beat count)
+#
+# Overlay-at-current-beat (no extra click beat):
+# 0 t 130
+# : t 130
+# : rep 12 3
+#
+# Dotted beat shorthand:
+# 1. = 1.5 beats
+
+# ------------------------------------------------------------
+# 4) METER LINES (PER-MEASURE MODE)
+# ------------------------------------------------------------
+# Basic:
+# 4/4
+# 3/4
+# 5/8.5
+# 4/6
+#
+# Composite groups:
+# 2+3/8
+# 3+3+2/4
+#
+# Meter repeat shorthand:
+# 4/4 x 10
+# 4/4 x10
+#
+# Inline command after meter token is anchored at measure start:
+# 3/4 t 88
+
+# ------------------------------------------------------------
+# 5) REPETITIONS
+# ------------------------------------------------------------
+# rep <spanBeats> <totalCountIncludingOriginal>
+# Example:
+# rep 12 3
+# Means: last 12 beats are heard 3 times total (2 extra repeats).
+#
+# Also valid in overlay form:
+# : rep 12 3
+
+# ------------------------------------------------------------
+# 6) TRANSPORT / CLICK / RECORD OUTPUT
+# ------------------------------------------------------------
+# t <bpm>
+# tempo <bpm>
+#
+# tc <targetBpm> <spanBeats> [curve]
+# tc 120 4
+# tc 50 3 1.2
+# If spanBeats <= 0, tc behaves as direct tempo set.
+#
+# clicklang <lang>
+# lang aliases:
+# sp|es|spanish
+# en|english
+# de|german|deutsch
+# none|off|mute
+#
+# stop
+#
+# rec [on|off|toggle|tgl|1|0]
+
+# ------------------------------------------------------------
+# 7) AUDIO COMMANDS
+# ------------------------------------------------------------
+# Channel gain:
+# ain <0..1.5>     -> MIC gain (alias: mic <0..1.5>)
+# elec <0..1.5>    -> ELEC gain
+# aout <0..1.5>    -> MASTER gain
+#
+# Extra aliases for ain/elec gain:
+# ain level|vol|volume <0..1.5>
+# elec level|vol|volume <0..1.5>
+#
+# MIC channel:
+# ain pan <-1..1>
+# ain reb|reverb|send <0..1>
+# ain low <-18..18>
+# ain mid <-18..18>
+# ain high <-18..18>
+#
+# ELEC channel:
+# elec pan <-1..1>
+# elec reb|reverb|send <0..1>
+# elec low <-18..18>
+# elec mid <-18..18>
+# elec high <-18..18>
+#
+# Master graphic EQ (6 bands):
+# eq <b0> <b1> <b2> <b3> <b4> <b5>
+# each band: <-18..18>
+#
+# Compressor:
+# comp th <-80..0>
+# comp at <0..1>
+# comp rel <0..1>
+# comp kn <0..40>
+# comp rt <1..20>
+#
+# Limiter:
+# lim th <-24..0>
+# lim rel <0.001..1>
+#
+# Reverb master:
+# reb <0..1>                -> wet mix
+# reb mix|wet|w <0..1>      -> wet mix
+# reb time|t <200..8000>    -> reverb time (ms)
+
+# ------------------------------------------------------------
+# 8) VIDEO CHANNEL COMMANDS
+# ------------------------------------------------------------
+# Channels:
+# vin b1 b2 b3 b4 vout
+#
+# Full state pack:
+# <ch> [durationMs] <mix> <hue> <contrast> <brightness> <saturation> <blur> <mask>
+#
+# Notes:
+# - duration prefix is optional
+# - partial packs are valid:
+#   <ch> [durationMs] <mix> <hue> ...
+# - mask is valid only for source channels: vin|b1|b2|b3|b4
+# - duration-prefix detection for packed form:
+#   if first numeric token is > 1.5 and second token is numeric, first token is treated as durationMs
+#
+# Short form:
+# <ch> <mix> [durationMs]
+#
+# Backward-compatible aliases:
+# <ch> fade <mix> [durationMs]
+# <ch> mix|level|luma|luminance <mix> [durationMs]
+#
+# Single-parameter form:
+# <ch> hue|h <-180..180> [durationMs]
+# <ch> contrast|cont|c <0..3> [durationMs]
+# <ch> brightness|bright|bri|b <0..3> [durationMs]
+# <ch> saturation|sat|s <0..3> [durationMs]
+# <ch> blur|bl <0..12> [durationMs]
+# <ch> mask <none|vin|b1|b2|b3|b4>
+
+# ------------------------------------------------------------
+# 9) BUFFER COMMANDS
+# ------------------------------------------------------------
+# vrec <bufferIndex> <durationMsOrBeats>
+#
+# vplay (playback only; FX is handled by video channel commands):
+# vplay <bufferIndex> <startMsOrBeats> <rate> <durationMsOrBeats> [mixTarget] [mixDurationMsOrBeats]
+#
+# Beat shorthand rule (vrec/vplay):
+# Time values > 0 and < 20 are interpreted as beats at score tempo at that event beat.
+# Values >= 20 are interpreted as milliseconds.
+#
+# Examples:
+# vrec 2 3
+# vplay 2 4 1 3
+#
+# bufferIndex notes:
+# 1..4 expected
+# 0 maps internally to buffer 1
+
+# ------------------------------------------------------------
+# 10) TEXT / OVERLAYS
+# ------------------------------------------------------------
+# title1 <sizeRem> <durationMs> <text...>
+# letra <sizeRem> <durationMs> <text...>   (alias of title1)
+#
+# subt <durationMs?> <text...>
+# subtitle <durationMs?> <text...>
+# letra2 <durationMs?> <text...>
+# palabra <durationMs?> <text...>
+# Default subtitle duration when omitted: 1200ms
+#
+# Subtitle vertical shift:
+# letra2 yshift <rem>
+
+# ------------------------------------------------------------
+# 11) REHEARSAL MARKS
+# ------------------------------------------------------------
+# mark <letter> <sectionName...>
+# Example:
+# mark A intro
+
+# ------------------------------------------------------------
+# 12) PARSER NOTES
+# ------------------------------------------------------------
+# Unknown commands are parsed as "unknown" and ignored at execution.
+# Meter can be explicit (meter lines) or inferred between strong beats ("b").
+# Timed state commands at beat 0 are included by start-state sync.
+
+# + beat 0.000
+: TEST2
