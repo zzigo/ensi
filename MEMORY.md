@@ -19,3 +19,6 @@ Project initialized in `26-ensi`. Created `/docs`, `AGENTS.md` (symlink), and `M
 
 #<26-04-24> transport sync deploy readiness
 Finished transport synchronization by typing SyncService messages and applying remote playback, position, and BPM changes through TransportEngine skip-broadcast paths. Replaced the unavailable Dockview React import with a small React host around dockview-core, fixed migration TypeScript blockers, and verified the production client build.
+
+#<26-04-24> vps deployment complete
+Deployed ENSi standalone to `/opt/ensi` on the VPS. Built the Vite client, started the Bun/Elysia backend with PM2 on port 3100, configured Caddy to serve `ensi.zztt.org` from `client/dist`, and proxied `/api/*` plus `/ws` to the backend.
