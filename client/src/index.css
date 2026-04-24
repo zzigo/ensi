@@ -1,0 +1,68 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #05070b;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dockview Customizations */
+.dockview-theme-dark {
+  --dv-active-tab-background-color: rgba(140, 245, 168, 0.18);
+  --dv-active-tab-color: #ffffff;
+  --dv-background-color: #0b1119;
+}
+
+.dv-void-container {
+  display: flex !important;
+  align-items: center;
+  padding-left: 6px;
+}
+
+.dv-add-tab-btn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(140, 245, 168, 0.15) !important;
+  border: 1px solid rgba(140, 245, 168, 0.4) !important;
+  border-radius: 4px;
+  color: #8cf5a8 !important;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  transition: all 0.12s ease;
+  margin-right: 6px;
+}
+
+.dv-add-tab-btn:hover {
+  background: rgba(140, 245, 168, 0.3) !important;
+  border-color: rgba(140, 245, 168, 0.7) !important;
+  transform: scale(1.1);
+}

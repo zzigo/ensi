@@ -1,0 +1,16 @@
+{
+  "name": "ensi-monorepo",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "bun run --filter \"*\" dev",
+    "build": "bun run --filter \"*\" build",
+    "start": "bun run --filter \"*\" start"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
